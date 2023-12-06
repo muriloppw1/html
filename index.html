@@ -1,39 +1,80 @@
-<!-- index.html -->
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha Seu Time</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #800000, #ff3333); /* Gradiente vermelho 3D */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+        }
+
+        #container {
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Sombra */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Sombra no texto */
+        }
+
+        .team-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .team-name {
+            font-size: 24px;
+            margin: 10px 0;
+            margin-right: 10px; /* Espaçamento à direita para os quadrados */
+        }
+
+        .team-square {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+        }
+
+        #timeBrancoSquare {
+            background-color: #fff; /* Quadrado branco */
+        }
+
+        #timePretoSquare {
+            background-color: #000; /* Quadrado preto */
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <h1>Teste NUI</h1>
-        <input type="text" id="texto" placeholder="Digite algo...">
-        <br>
-        <button onclick="enviarTexto()">Enviar</button>
+    <div id="container">
+        <h1>Escolha Seu Time</h1>
+        <div class="team-container">
+            <div class="team-name" id="timeBranco">Time Branco</div>
+            <div class="team-square" id="timeBrancoSquare"></div>
+        </div>
+        <div class="team-container">
+            <div class="team-name" id="timePreto">Time Preto</div>
+            <div class="team-square" id="timePretoSquare"></div>
+        </div>
+
+        <!-- Adicione mais elementos conforme necessário, como botões, imagens, etc. -->
+
+        <script>
+            // Adicione scripts JavaScript conforme necessário
+        </script>
     </div>
-
-    <script>
-        function enviarTexto() {
-            var texto = document.getElementById('texto').value;
-            if (texto !== '') {
-                emit('enviarTexto', { texto: texto });
-            }
-        }
-
-        document.onkeyup = function (data) {
-            if (data.which == 27) {
-                emit('fecharNUI', {});
-            }
-        };
-
-        function emit(eventName, eventData) {
-            fetch(`http://${GetParentResourceName()}/${eventName}`, {
-                method: 'post',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8',
-                },
-                body: JSON.stringify(eventData),
-            });
-        }
-    </script>
 </body>
 </html>
