@@ -1,80 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escolha Seu Time</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: linear-gradient(to bottom, #800000, #ff3333); /* Gradiente vermelho 3D */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #fff;
-        }
 
-        #container {
-            text-align: center;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Sombra */
-            padding: 20px;
-            border-radius: 10px;
-        }
+    <script>
+        window.addEventListener('message', function (event) {
+            var slotGameUI = document.getElementById('slotGameUI');
 
-        h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Sombra no texto */
-        }
-
-        .team-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .team-name {
-            font-size: 24px;
-            margin: 10px 0;
-            margin-right: 10px; /* Espaçamento à direita para os quadrados */
-        }
-
-        .team-square {
-            width: 30px;
-            height: 30px;
-            border-radius: 5px;
-        }
-
-        #timeBrancoSquare {
-            background-color: #fff; /* Quadrado branco */
-        }
-
-        #timePretoSquare {
-            background-color: #000; /* Quadrado preto */
-        }
-    </style>
+            if (event.data.openSlotGame) {
+                slotGameUI.style.display = 'block';
+            } else if (event.data.closeSlotGame) {
+                slotGameUI.style.display = 'none';
+            }
+        });
+    </script>
 </head>
 <body>
-    <div id="container">
-        <h1>Escolha Seu Time</h1>
-        <div class="team-container">
-            <div class="team-name" id="timeBranco">Time Branco</div>
-            <div class="team-square" id="timeBrancoSquare"></div>
-        </div>
-        <div class="team-container">
-            <div class="team-name" id="timePreto">Time Preto</div>
-            <div class="team-square" id="timePretoSquare"></div>
-        </div>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #000; /* Fundo preto 3D */
+      color: #fff; /* Cor do texto branco */
+    }
 
-        <!-- Adicione mais elementos conforme necessário, como botões, imagens, etc. -->
+    h1 {
+      margin-bottom: 20px;
+    }
 
-        <script>
-            // Adicione scripts JavaScript conforme necessário
-        </script>
+    img {
+      width: 300px; /* Tamanho ajustável */
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .slot {
+      display: flex;
+      flex-direction: column; /* Alteração para disposição vertical */
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: row; /* Alterado para disposição horizontal dentro de cada coluna */
+      align-items: center;
+      margin: 20px; /* Espaço entre colunas */
+      border: 2px solid #ff0000; /* Borda vermelha */
+      border-radius: 10px; /* Borda arredondada */
+      background-color: #444; /* Cor de fundo cinza */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para efeito 3D */
+    }
+
+    .square {
+      width: 50px;
+      height: 50px;
+      background-color: #ff0000; /* Cor vermelha */
+      margin: 5px;
+      transform: perspective(600px) rotateX(20deg); /* Adicionando uma rotação 3D */
+      border: 2px solid #000; /* Borda preta para detalhes */
+      border-radius: 5px; /* Borda arredondada */
+      overflow: hidden; /* Garante que a imagem não ultrapasse os limites do quadrado */
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff0000;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #status {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 18px;
+    }
+
+    #saldo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 18px;
+    }
+
+    .input-group {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    label {
+      color: #ccc; /* Cor do texto cinza para o label */
+      margin-right: 10px;
+    }
+
+    input {
+      padding: 5px;
+      font-size: 14px;
+      background-color: #666; /* Fundo cinza escuro */
+      color: #fff; /* Cor do texto branco */
+      border: none;
+      border-radius: 5px;
+    }
+    
+    .square img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>URSINHO DO DINHEIRO</h1>
+
+  <img src="https://media.discordapp.net/attachments/1060058646186311740/1191952498479595540/bear-cute-png-clipart-baby-baby-cards-babyshower-b.png?ex=65a74f45&is=6594da45&hm=b9aa1a3576aa536ec88031b0d7d5a902840284f9738644a88e0eed71a90aa4c6&=&format=webp&quality=lossless&width=492&height=597" alt="Ursinho do Dinheiro">
+
+  <div class="input-group">
+    <label for="betAmount">Valor da Aposta:</label>
+    <input type="number" id="betAmount" min="1" value="1">
+  </div>
+
+  <div class="slot" id="columns">
+    <div class="column" id="column1">
+      <div class="square" id="square1"></div>
+      <div class="square" id="square2"></div>
+      <div class="square" id="square3"></div>
     </div>
+
+    <div class="column" id="column2">
+      <div class="square" id="square4"></div>
+      <div class="square" id="square5"></div>
+      <div class="square" id="square6"></div>
+    </div>
+
+    <div class="column" id="column3">
+      <div class="square" id="square7"></div>
+      <div class="square" id="square8"></div>
+      <div class="square" id="square9"></div>
+    </div>
+  </div>
+
+  <button onclick="spinSlots()">Rodar Slots</button>
+
+  <div id="status"></div>
+  <div id="saldo">Saldo: 1000 RS</div>
+
+   <script>
+    let gameStatusElement = document.getElementById('status');
+    let saldoElement = document.getElementById('saldo');
+    let saldo = 1000;
+    let trevoCount = 0;
+    let trevoBonus = 0;
+
+    const images = [
+      'https://media.discordapp.net/attachments/1060058646186311740/1191955154421956710/pngegg.png?ex=65a751be&is=6594dcbe&hm=b77fce6f4ff6b3c566f1d28700c0c344f7f55e6bd4a87848db26d4fb81fc6170&=&format=webp&quality=lossless&width=1048&height=597',
+      'https://media.discordapp.net/attachments/1060058646186311740/1191955802953613334/kisspng-four-leaf-clover-luck-clip-art-irish-5ab94e3f38d5a1.6477177115220936312328.png?ex=65a75258&is=6594dd58&hm=4801b6eba304932128ea81472c56c0acf51cb9bc661d0afc4e1a9501a05b837b&=&format=webp&quality=lossless&width=597&height=597',
+      'https://media.discordapp.net/attachments/1060058646186311740/1191954241217114113/pngtree-gold-nugget-mineral-boulder-stone-rock-cartoon-isolated-png-image_6413732.png?ex=65a750e4&is=6594dbe4&hm=b0450d2b2e251866687fb5acbe01833df19b166e9e56a338fe6122f226403179&=&format=webp&quality=lossless',
+    ];
+
+    function getRandomImage() {
+      return images[Math.floor(Math.random() * images.length)];
+    }
+
+    function spinSlots() {
+      const betAmount = parseInt(document.getElementById('betAmount').value);
+
+      if (betAmount > saldo) {
+        displayResult('Saldo insuficiente. Reduza o valor da aposta.');
+        return;
+      }
+
+      saldo -= betAmount;
+      saldoElement.innerText = `Saldo: ${saldo} RS`;
+
+      const squares = document.querySelectorAll('.square');
+
+      squares.forEach(square => {
+        square.innerHTML = `<img src="${getRandomImage()}" alt="Elemento">`;
+      });
+
+      checkWin(betAmount);
+    }
+
+    const elementosParaVitoria = 5;
+
+    function checkWin(betAmount) {
+      const elements = Array.from(document.querySelectorAll('.square img')).map(img => img.src);
+
+      const winCondition = elements.find(element =>
+        elements.filter(e => e === element).length >= elementosParaVitoria
+      );
+
+      if (winCondition) {
+        if (winCondition.includes('four-leaf-clover')) {
+          // Trevo
+          trevoCount += 1;
+
+          if (trevoCount === 5) {
+            trevoBonus = 0.1 * betAmount;
+            saldo += betAmount + trevoBonus;
+            trevoCount = 0;
+            displayResult(`Parabéns! Você conquistou os 5 trevos e teve 10% de sorte na próxima rodada.`);
+          } else {
+            saldo += betAmount + 0.1 * betAmount;
+            displayResult(`Parabéns! Você ganhou com 10% de sorte na próxima rodada.`);
+          }
+        } else {
+          saldo += 2 * betAmount;
+          displayResult(`Parabéns! Você ganhou com ${getElementType(winCondition)}`);
+        }
+      } else {
+        displayResult(`Você perdeu. Tente novamente!`);
+      }
+
+      saldoElement.innerText = `Saldo: ${saldo} RS`;
+    }
+
+    function getElementType(imageSrc) {
+      if (imageSrc.includes('pngegg')) {
+        return 'Ouro';
+      } else if (imageSrc.includes('four-leaf-clover')) {
+        return 'Trevo';
+      } else if (imageSrc.includes('gold-nugget')) {
+        return 'Pepita';
+      }
+      return 'Desconhecido';
+    }
+
+    function displayResult(result) {
+      gameStatusElement.innerText = result;
+    }
+  </script>
+
 </body>
-</html>
+</html
